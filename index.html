@@ -79,7 +79,7 @@
         event.preventDefault();
 
         const content = "content";
-        const today = new Date().toLocaleDateString();
+        const today = new Date().toLocaleDateString(); //сьогоднішня дата у вигляді рядку для назви пдф
 
         let courseID = document
           .querySelector("input[name='courseID']")
@@ -91,7 +91,22 @@
 
         let studentName = document
           .querySelector("input[name='studentName']")
-          .value.trim();
+          .value.replace(/\s+/gim, " ")
+          .trim();
+
+        if (/(\w)+(\s)(\w)+/gim.test(studentName)) {
+          studentName = studentName.toLowerCase();
+          let studentNameArray = studentName.split(" ");
+
+          let studentNameArray1 = studentNameArray[0].split("");
+          studentNameArray1[0] = studentNameArray1[0].toUpperCase();
+          studentNameArray1 = studentNameArray1.join("");
+          let studentNameArray2 = studentNameArray[1].split("");
+          studentNameArray2[0] = studentNameArray2[0].toUpperCase();
+          studentNameArray2 = studentNameArray2.join("");
+
+          studentName = studentNameArray1 + " " + studentNameArray2;
+        }
 
         let graduationDate = document
           .querySelector("input[name='graduationDate']")
