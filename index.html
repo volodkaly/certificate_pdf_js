@@ -101,7 +101,7 @@
           .value.replace(/\s+/gim, " ")
           .trim();
 
-        if (/(\w)+(\s)(\w)+/gim.test(studentName)) {
+        if (/(\p{L})+(\s)(\p{L})+/gimu.test(studentName)) {
           studentName = studentName.toLowerCase();
           let studentNameArray = studentName.split(" ");
 
