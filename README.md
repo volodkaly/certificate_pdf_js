@@ -1,4 +1,4 @@
-<h1>[Available under the link](https://volodkaly.github.io/certificate_pdf/)</h1>
+<h1>https://volodkaly.github.io/certificate_pdf/</h1>
 
 ![image](https://github.com/user-attachments/assets/9ff238db-c312-4a02-8d76-1be3bc4505b4)
 ![image](https://github.com/user-attachments/assets/3e2c2085-b035-497a-895c-181431b2fe82)
