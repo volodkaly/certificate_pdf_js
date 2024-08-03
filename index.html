@@ -94,7 +94,8 @@
 
         let courseName = document
           .querySelector("input[name='courseName']")
-          .value.trim();
+          .value.replace(/\s+/gim, " ")
+          .trim();
 
         let studentName = document
           .querySelector("input[name='studentName']")
