@@ -26,7 +26,11 @@
     />
   </head>
   <body>
-    <form id="form" class="w-25 m-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+    <form
+      id="form"
+      class="w-50 m-3 shadow p-3 mb-5 bg-body-tertiary rounded"
+      style="min-width: 200px"
+    >
       Номер:
       <br />
       <input
@@ -34,6 +38,7 @@
         id="courseID"
         type="text"
         name="courseID"
+        maxlength="100"
         placeholder="номер курсу"
         required
       />
@@ -45,6 +50,7 @@
         class="form-control"
         type="text"
         name="courseName"
+        maxlength="100"
         placeholder="назва курсу"
         required
       />
@@ -55,6 +61,7 @@
         class="form-control"
         type="text"
         name="studentName"
+        maxlength="100"
         placeholder="ім'я учня"
         required
       />
