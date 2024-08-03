@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-to-pdfmake/browser.js"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Homemade+Apple"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <form id="form" class="w-25 m-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+      Номер:
+      <br />
+      <input
+        class="form-control"
+        id="courseID"
+        type="text"
+        name="courseID"
+        placeholder="номер курсу"
+        required
+      />
+
+      <br />
+      Курс:
+      <br />
+      <input
+        class="form-control"
+        type="text"
+        name="courseName"
+        placeholder="назва курсу"
+        required
+      />
+      <br />
+      Ім'я учня:
+      <br />
+      <input
+        class="form-control"
+        type="text"
+        name="studentName"
+        placeholder="ім'я учня"
+        required
+      />
+      <br />
+      Дата завершення курсу:
+      <br />
+      <input
+        class="form-control"
+        type="date"
+        name="graduationDate"
+        placeholder="дата завершення"
+        required
+      />
+      <button class="btn btn-primary m-2" id="downloadReportPDF" type="submit">
+        Отримати сертифікат
+      </button>
+    </form>
+  </body>
+  <script>
+    $(document).ready(function () {
+      $("#downloadReportPDF").click(function () {
+        event.preventDefault();
+
+        const content = "content";
+        const today = new Date().toLocaleDateString();
+
+        let courseID = document
+          .querySelector("input[name='courseID']")
+          .value.trim();
+
+        let courseName = document
+          .querySelector("input[name='courseName']")
+          .value.trim();
+
+        let studentName = document
+          .querySelector("input[name='studentName']")
+          .value.trim();
+
+        let graduationDate = document
+          .querySelector("input[name='graduationDate']")
+          .value.trim();
+
+        if (!courseID) {
+          document.querySelector("#courseID").classList.add("is-invalid");
+        } else {
+          document.querySelector("#courseID").classList.remove("is-invalid");
+
+          document.querySelector("#courseID").classList.add("is-valid");
+        }
+
+        if (!courseName) {
+          document
+            .querySelector("input[name='courseName']")
+            .classList.add("is-invalid");
+        } else {
+          document
+            .querySelector("input[name='courseName']")
+            .classList.remove("is-invalid");
+
+          document
+            .querySelector("input[name='courseName']")
+            .classList.add("is-valid");
+        }
+
+        if (!studentName) {
+          document
+            .querySelector("input[name='studentName']")
+            .classList.add("is-invalid");
+        } else {
+          document
+            .querySelector("input[name='studentName']")
+            .classList.remove("is-invalid");
+
+          document
+            .querySelector("input[name='studentName']")
+            .classList.add("is-valid");
+        }
+
+        if (!graduationDate) {
+          document
+            .querySelector("input[name='graduationDate']")
+            .classList.add("is-invalid");
+        } else {
+          document
+            .querySelector("input[name='graduationDate']")
+            .classList.remove("is-invalid");
+
+          document
+            .querySelector("input[name='graduationDate']")
+            .classList.add("is-valid");
+        }
+
+        const docDefinition = {
+          info: {
+            title: "course certificate",
+            author: "Vladimir Lasac",
+          },
+          pageOrientation: "landscape",
+          pageMargins: [40, 60, 40, 60],
+          content: [
+            {
+              text: "Сертифікат",
+              style: "title",
+            },
+            {
+              text: "№: " + courseID,
+              style: "text",
+            },
+            {
+              text: "Курс: " + courseName,
+              style: "text",
+            },
+            {
+              text: "Ім'я: " + studentName,
+              style: "header",
+            },
+            {
+              text: "Дата завершення: \n" + graduationDate,
+              style: "textLeft",
+              absolutePosition: { x: 200, y: 400 },
+            },
+            {
+              qr: "https://example.com/certificates/" + courseID,
+              fit: "150",
+              absolutePosition: { x: 500, y: 400 },
+            },
+          ],
+
+          styles: {
+            title: {
+              fontSize: 36,
+              alignment: "center",
+              color: "silver",
+              bold: false,
+              characterSpacing: 10,
+            },
+            header: {
+              fontSize: 48,
+              alignment: "center",
+              bold: true,
+              italics: true,
+              marginTop: 20,
+            },
+            text: {
+              fontSize: 36,
+              bold: false,
+              alignment: "right",
+              marginTop: 20,
+            },
+            textLeft: {
+              fontSize: 24,
+              bold: false,
+              alignment: "left",
+            },
+          },
+        };
+
+        if (courseID && courseName && studentName && graduationDate) {
+          pdfMake.createPdf(docDefinition).download(`certificate_${today}.pdf`);
+        }
+      });
+    });
+  </script>
+</html>
+
+<!-- https://docs.google.com/document/d/1__9M0ztm1VifyZwLB9Sl6S3xo8NlJSoCBYIKxvpIUxQ/edit -->
