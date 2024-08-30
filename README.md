@@ -1,6 +1,6 @@
 <h1>
   
-[Доступно за цим посиланням](https://volodkaly.github.io/certificate_pdf/)
+[Доступно за цим посиланням](https://volodkaly.github.io/certificate_pdf_js/)
 
 </h1>
 
